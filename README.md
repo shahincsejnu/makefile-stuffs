@@ -86,7 +86,34 @@ sub_target: sub_target.c
 - We can change the list of C source files into a list of object files by replacing the ‘.c’ suffix with ‘.o’ in the result, like this:
     - `$(wildcard *.o)`
 
-# Techniques & Concepts & Basics
+
+# Techniques
+
+* `%`: we can use this in any place of a string, it basically a variable which get the value of that portion from the string. For example:
+    - `BINS := $(SRCS:%.c=%`: This is called as substitution reference. In this case, if SRCS has values 'foo.c bar.c', BINS will have 'foo bar'.
+* If we use `%` as a target then it can match any target name. For example:
+    - ```Makefile
+      SRCS := $(wildcard *.c)
+      BINS := $(SRCS:%.c=%)
+      
+      all: ${BINS}
+      
+      %: %.o
+          @echo "Checking.."
+          gcc -lm $< -o $@
+      ```
+      This rule will be called for every value in `${BINS}`. Suppose foo is one of the values in ${BINS}. Then % will match foo(% can match any target name). Below is the rule in its expanded form:
+      ```Makefile
+      foo: foo.o
+          @echo "Checking.."
+          gcc -lm foo.o -o foo
+      ```
+      As shown, `%` is replaced by `foo`
+- `$<` is patterned to match prerequisites
+- `$@` is patterned to match the target
+
+
+# Concepts & Basics
 
 - only one `Makefile` should be in a folder
 - only `make` will run the first target from the `Makefile` by default, first target in the makefile is the default target.
