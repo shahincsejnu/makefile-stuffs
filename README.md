@@ -41,7 +41,8 @@ sub_target: sub_target.c
 
 * Recursive Expanded Variable (`=` operator):
     - we can assign a variable value by `=` operator, ex: `CC = gcc`
-    - when you use this becareful about the concepts about assigning another variable in a variable by `=` operator, below example will show error, cause by `=` operator it works like assign right part varible value of left part varaible.
+    - It is evaluated everytime the variable is encountered in the code.
+    - when you use this be careful about the concepts about assigning another variable in a variable by `=` operator, below example will show error, cause by `=` operator it works like assign right part varible value of left part varaible.
         - ```Makefile
           CC = gcc
           CC = $(CC)
@@ -59,15 +60,29 @@ sub_target: sub_target.c
           ```
           if we do `make` for this example the output will be `a = 20 and b = 20`, think about pointers, it basically works like that, here by `b = $(a)` means `b` point the `a`'s location but `b`'s value cannot change `a`'s value.
 
+* Simply Expanded Variable (`:=` operator):
+    - we can assign a variable value by `:=` operator, ex: `CC := gcc`
+    - this is not like recursive-expanded-variable, so it does not have that problem
+    - It is evaluated only once, at the very first occurrence
+    - For example:
+        - ```Makefile
+          CC := gcc
+          CC := $(CC)
+          
+          check:
+                @echo $(CC)
+          ```
+          it won't show any error like recursive-expanded-variable, the output will be `gcc`
 
 # Techniques & Concepts & Basics
 
 - only one `Makefile` should be in a folder
 - only `make` will run the first target from the `Makefile` by default, first target in the makefile is the default target.
 - use `make <target_name>` for running the specific <target_name> target from the `Makefile` 
-- Both `${CC}` and `$(CC)` are valid reference of a variable namded `CC`
+- Both `${CC}` and `$(CC)` are valid reference of a variable named `CC`
 - Makefile doesn't execute line by line code like many others, it does the whole, so you can first assign a variable to another thing and then declare that variable.
 - always remember <TAB> while giving the recipe
+- to avoid printing the command while doing `make` we need to give `@` in front of the commands, for ex: `@echo "oka"`
 
 # Resources
 
