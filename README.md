@@ -74,6 +74,18 @@ sub_target: sub_target.c
           ```
           it won't show any error like recursive-expanded-variable, the output will be `gcc`
 
+# `wildcard` function
+
+- ```Makefile
+  $(wildcard pattern...)
+  ```
+  This string, used anywhere in a makefile, is replaced by a space-separated list of names of existing files that match one of the given file name `patterns`. If no existing file name matches a pattern, then that pattern is omitted from the output of the wildcard function.
+
+- One use of the wildcard function is to get a list of all the C source files in a directory, like this:
+    - `$(wildcard *.c)`
+- We can change the list of C source files into a list of object files by replacing the ‘.c’ suffix with ‘.o’ in the result, like this:
+    - `$(wildcard *.o)`
+
 # Techniques & Concepts & Basics
 
 - only one `Makefile` should be in a folder
@@ -83,6 +95,8 @@ sub_target: sub_target.c
 - Makefile doesn't execute line by line code like many others, it does the whole, so you can first assign a variable to another thing and then declare that variable.
 - always remember <TAB> while giving the recipe
 - to avoid printing the command while doing `make` we need to give `@` in front of the commands, for ex: `@echo "oka"`
+- `make -n <target_name>`: For seeing the process sequences by which makefile executes the all process (it will execute the sequnce from left to right), it's just preview not the execution
+
 
 # Resources
 
