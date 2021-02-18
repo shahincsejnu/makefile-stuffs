@@ -25,6 +25,21 @@ sub_target: sub_target.c
         Recipe_to_create_sub_target
 ```
 
+# What Makefiles contain
+
+Makefiles contain five kinds of things: explicit rules, implicit rules, variable definitions, directives, and comments.
+
+* Explicit rules: An explicit rule says when and how to remake one or more files, called the rule’s targets. It lists the other files that the targets depend on, called the prerequisites of the target, and may also give a recipe to use to create or update the targets. See [Writing Rules](https://www.gnu.org/software/make/manual/html_node/Rules.html#Rules).
+
+* Implicit rules: An implicit rule says when and how to remake a class of files based on their names. It describes how a target may depend on a file with a name similar to the target and gives a recipe to create or update such a target. See [Using Implicit Rules](https://www.gnu.org/software/make/manual/html_node/Implicit-Rules.html#Implicit-Rules)
+
+* Variable definition: A variable definition is a line that specifies a text string value for a variable that can be substituted into the text later. The simple makefile example shows a variable definition for objects as a list of all object files (see [Variables Make Makefiles Simpler](ps://www.gnu.org/software/make/manual/html_node/Variables-Simplify.html#Variables-Simplify)
+
+* Directive: A directive is an instruction for make to do something special while reading the makefile. This included reading another makefile, deciding, defining etc.
+
+* Comments: `#` in a line of a makefile starts a comment. If you want a literal #, escape it with a backslash (e.g., \#).
+
+
 # Terms Definition
 
 * target: 
