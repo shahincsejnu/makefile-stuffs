@@ -35,7 +35,7 @@ sub_target: sub_target.c
 # Techniques & Concepts & Basics
 
 - only one `Makefile` should be in a folder
-- only `make` will run the first target from the `Makefile` by default
+- only `make` will run the first target from the `Makefile` by default, first target in the makefile is the default target.
 - use `make <target_name>` for running the specific <target_name> target from the `Makefile` 
 
 
