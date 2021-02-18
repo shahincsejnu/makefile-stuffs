@@ -24,12 +24,18 @@ sub_target: sub_target.c
         Recipe_to_create_sub_target
 ```
 
-## Terms Definition
+# Terms Definition
 
 * target: 
 * prerequisites: 
 * recipe: 
 * phony targets: 
+* .DEFAULT_GOAL: 
+* .PHONY: 
+* variables:
+* patterns: 
+* functions:
+
 
 
 # Techniques & Concepts & Basics
@@ -37,7 +43,7 @@ sub_target: sub_target.c
 - only one `Makefile` should be in a folder
 - only `make` will run the first target from the `Makefile` by default, first target in the makefile is the default target.
 - use `make <target_name>` for running the specific <target_name> target from the `Makefile` 
-
+- Both `${CC}` and `$(CC)` are valid reference of a variable namded `CC`
 
 # Resources
 
